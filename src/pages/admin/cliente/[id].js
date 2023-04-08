@@ -61,8 +61,9 @@ export default function ClienteDetail({ cliente, error }) {
   );
 }
 
-export async function getServerSideProps({ query: { id } }) {
-  const res = await fetch(`http://localhost:3000/api/clientes/${id}`);
+export async function getServerSideProps({ query: { id }, ...context }) {
+  const { req } = context;
+  const res = await fetch(`http://${req.headers.host}/api/clientes/${id}`);
   const cliente = await res.json();
 
   if (res.status === 200) {

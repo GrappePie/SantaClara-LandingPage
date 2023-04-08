@@ -48,7 +48,8 @@ export default function clientes({ clientes }) {
 }
 
 export async function getServerSideProps(context) {
-    const res = await fetch('http://localhost:3000/api/clientes')
+  const { req } = context;
+    const res = await fetch(`http://${req.headers.host}/api/clientes`)
     const clientes = await res.json()
     return {
       props: {
