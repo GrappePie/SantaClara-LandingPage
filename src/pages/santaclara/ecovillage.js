@@ -4,12 +4,10 @@ import { useState } from "react";
 
 export default function Ecovillage({
   images: defaultImages,
-  videos: defaultVideos,
   nextCursor: defaultNextCursor,
   folders,
 }) {
   const [images, setImages] = useState(defaultImages);
-  const [videos, setVideos] = useState(defaultVideos);
   const [nextCursor, setNextCursor] = useState(defaultNextCursor);
   async function handleLoadMore(e) {
     //e.preventDefault()
@@ -48,16 +46,7 @@ export default function Ecovillage({
       menuItem: "Videos",
       render: () => (
         <Tab.Pane attached={false}>
-          {videos.map((video) => (
-            <Embed 
-            key={video.id}
-            active url={video.url} 
-            autoplay
-            iframe={{
-              allowFullScreen: true,
-            }}
-            />
-          ))}
+          <Embed id="711270116" source="vimeo" active />
         </Tab.Pane>
       ),
     },
@@ -71,22 +60,16 @@ export default function Ecovillage({
 }
 
 export async function getStaticProps() {
-  const imgResults = await search({
+  const result = await search({
     expression: "folder:santaclara/ecovillage/images",
   });
-  const vidResults = await search({
-    expression: "folder:santaclara/ecovillage/videos",
-  });
-  const { resources: imgResources, next_cursor: imgNextCursor } = imgResults;
-  const { resources: vidResources, next_cursor: vidNextCursor } = vidResults;
-  const images = mapImageResources(imgResources);
-  const videos = mapImageResources(vidResources);
+  const { resources, next_cursor: nextCursor } = result;
+  const images = mapImageResources(resources);
 
   return {
     props: {
-      images: images || [],
-      videos: videos || [],
-      nextCursor: imgNextCursor || false,
+      images,
+      nextCursor: nextCursor || false,
     },
   };
 }

@@ -13,7 +13,7 @@ export default function HomePage() {
               position: "fixed",
               left: "50%",
               top: "50%",
-              height: "93vh",
+              maxWidth: "100vw",
               objectFit: "cover",
               transform: "translate(-50%,-46%)",
               zIndex: "-1",
