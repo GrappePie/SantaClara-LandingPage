@@ -2,10 +2,11 @@ import { Menu, Container, Button } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { getSession, signIn, signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Navbar = () => {
   const router = useRouter();
+  const myRef = useRef(null);
   const [hide, setHide] = useState(false);
   useEffect(() => {
     getSession().then((session) => {
@@ -30,7 +31,7 @@ const Navbar = () => {
     router.push("/")
   }
   return (
-    <Menu stackable attached borderless>
+    <Menu stackable attached borderless ref={myRef}>
       <Container>
         <Menu.Item>
           <Link href="/">
