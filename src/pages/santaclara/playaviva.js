@@ -2,22 +2,28 @@ import { Container, Image, Button, Tab, Embed } from "semantic-ui-react";
 import { search, mapImageResources } from "@/lib/cloudinary";
 import { useState } from "react";
 
-export default function Playaviva({ images: defaultImages, nextCursor: defaultNextCursor, folders }) {
-  const [images, setImages] = useState(defaultImages)
-  const [nextCursor, setNextCursor] = useState(defaultNextCursor)
+export default function Playaviva({
+  images: defaultImages,
+  nextCursor: defaultNextCursor,
+  folders,
+}) {
+  const [images, setImages] = useState(defaultImages);
+  const [nextCursor, setNextCursor] = useState(defaultNextCursor);
   async function handleLoadMore(e) {
     //e.preventDefault()
-    const results = await fetch("/api/images/search",{
+    const results = await fetch("/api/images/search", {
       method: "POST",
       body: JSON.stringify({
-        nextCursor
-      })
-    }).then(r => r.json());
-    const { resources, next_cursor: updatedNextCursor } = results
-    const images = mapImageResources(resources)
+        nextCursor,
+      }),
+    }).then((r) => r.json());
+    const { resources, next_cursor: updatedNextCursor } = results;
+    const images = mapImageResources(resources);
 
-    setImages(prev => {[...prev, ...images]})
-    setNextCursor(updatedNextCursor)
+    setImages((prev) => {
+      [...prev, ...images];
+    });
+    setNextCursor(updatedNextCursor);
   }
 
   const panes = [
@@ -31,7 +37,9 @@ export default function Playaviva({ images: defaultImages, nextCursor: defaultNe
             ))}
           </Image.Group>
           {!nextCursor ? null : (
-            <Button onClick={() => handleLoadMore(nextCursor)}>Load More</Button>
+            <Button onClick={() => handleLoadMore(nextCursor)}>
+              Load More
+            </Button>
           )}
         </Tab.Pane>
       ),
@@ -40,12 +48,7 @@ export default function Playaviva({ images: defaultImages, nextCursor: defaultNe
       menuItem: "Videos",
       render: () => (
         <Tab.Pane attached={false}>
-          <Embed
-    id='797764303'
-    source='vimeo'
-    active
-    brandedUI
-  />
+          <Embed id="797764303" source="vimeo" active />
         </Tab.Pane>
       ),
     },
@@ -54,15 +57,15 @@ export default function Playaviva({ images: defaultImages, nextCursor: defaultNe
     <Container>
       <Tab menu={{ attached: false }} panes={panes} />
     </Container>
-  )
+  );
 }
 
 export async function getStaticProps() {
   const result = await search({
     expression: "folder:santaclara/playaviva/images",
   });
-  const { resources, next_cursor: nextCursor } = result
-  const images = mapImageResources(resources)
+  const { resources, next_cursor: nextCursor } = result;
+  const images = mapImageResources(resources);
 
   return {
     props: {
@@ -70,5 +73,4 @@ export async function getStaticProps() {
       nextCursor: nextCursor || false,
     },
   };
-  
 }
