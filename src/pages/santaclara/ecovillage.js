@@ -4,7 +4,7 @@ import { CldImage } from "next-cloudinary";
 import { search, mapImageResources } from "@/lib/cloudinary";
 import { useState } from "react";
 
-export default function Ecovillage({ images: defaultImages, nextCursor: defaultNextCursor, folders }) {
+export default function ecovillage({ images: defaultImages, nextCursor: defaultNextCursor, folders }) {
   const [images, setImages] = useState(defaultImages)
   const [nextCursor, setNextCursor] = useState(defaultNextCursor)
   async function handleLoadMore(e) {

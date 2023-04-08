@@ -2,7 +2,7 @@ import { Button, Container, Grid, Table } from "semantic-ui-react";
 import { useRouter } from "next/router";
 
 export default function clientes({ clientes }) {
-    const Router = useRouter();
+    const router = useRouter();
     if (clientes.data.length === 0) return (
         <Grid centered verticalAlign="middle" columns={1} style={{height:"80vh"}}>
           <Grid.Row>
@@ -36,7 +36,7 @@ export default function clientes({ clientes }) {
                       <Table.Cell>{cliente.telefono}</Table.Cell>
                       <Table.Cell>{cliente.createdAt}</Table.Cell>
                       <Table.Cell>
-                        <Button color="green" onClick={() => Router.push(`/admin/cliente/${cliente._id}`)}>Opciones</Button>
+                        <Button color="green" onClick={() => router.push(`/admin/cliente/${cliente._id}`)}>Opciones</Button>
                       </Table.Cell>
                     </Table.Row>
                   ))}
