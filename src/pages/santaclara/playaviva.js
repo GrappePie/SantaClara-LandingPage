@@ -35,7 +35,7 @@ export default function Playaviva({ images: defaultImages, nextCursor: defaultNe
 
 export async function getStaticProps() {
   const result = await search({
-    expression: "folder:santaclara/playaviva",
+    expression: "folder:santaclara/playaviva/images",
   });
   const { resources, next_cursor: nextCursor } = result
   const images = mapImageResources(resources)

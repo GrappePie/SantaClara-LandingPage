@@ -18,8 +18,14 @@ const Navbar = () => {
     })
   }, [])
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    signIn();
+  };
 
-  const logingOut = () => {
+
+  const handleLogout = (e) => {
+    e.preventDefault();
     signOut()
     router.push("/")
   }
@@ -51,12 +57,12 @@ const Navbar = () => {
           </Button>
           {(hide)?<Button
             color="blue"
-            onClick={() => signIn()}
+            onClick={handleLogin}
           >
             Login
           </Button>:<Button
             color="red"
-            onClick={logingOut}
+            onClick={handleLogout}
           >
             Logout
           </Button>}

@@ -36,7 +36,7 @@ export default function Ecovillage({ images: defaultImages, nextCursor: defaultN
 
 export async function getStaticProps() {
   const result = await search({
-    expression: "folder:santaclara/ecovillage",
+    expression: "folder:santaclara/ecovillage/images",
   });
   const { resources, next_cursor: nextCursor } = result
   const images = mapImageResources(resources)
