@@ -40,6 +40,7 @@ export default NextAuth({
     pages: {
         signIn: "/login",
     },
-    theme: "light",
-    debug: true,
+    theme: {
+        colorScheme: "light",
+    }
 });
