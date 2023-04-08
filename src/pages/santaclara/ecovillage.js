@@ -1,6 +1,4 @@
 import { Container, Image, Button } from "semantic-ui-react";
-import Link from "next/link";
-import { CldImage } from "next-cloudinary";
 import { search, mapImageResources } from "@/lib/cloudinary";
 import { useState } from "react";
 
