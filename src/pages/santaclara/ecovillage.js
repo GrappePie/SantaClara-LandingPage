@@ -1,6 +1,7 @@
-import { Container, Image, Button } from "semantic-ui-react";
+import { Container, Button } from "semantic-ui-react";
 import { search, mapImageResources } from "@/lib/cloudinary";
 import { useState } from "react";
+import Image from 'next/image'
 
 export default function Ecovillage({ images: defaultImages, nextCursor: defaultNextCursor, folders }) {
   const [images, setImages] = useState(defaultImages)
@@ -22,11 +23,15 @@ export default function Ecovillage({ images: defaultImages, nextCursor: defaultN
   
   return (
     <Container>
-      <Image.Group>
         {images.map((image) => (
-          <Image key={image.id} src={image.url} />
+          <Image
+          src={image.url}
+          alt=""
+          width={image.width}
+          height={image.height}
+          key={image.id}
+          />
         ))}
-      </Image.Group>
           {!nextCursor?null:<Button onClick={() => handleLoadMore(nextCursor)}>Load More</Button>}
     </Container>
   );
@@ -38,7 +43,7 @@ export async function getStaticProps() {
   });
   const { resources, next_cursor: nextCursor } = result
   const images = mapImageResources(resources)
-
+  console.log(images)
   return {
     props: {
       images,
