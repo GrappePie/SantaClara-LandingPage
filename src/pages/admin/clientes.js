@@ -1,7 +1,7 @@
 import { Button, Container, Grid, Table } from "semantic-ui-react";
 import { useRouter } from "next/router";
 
-export default function clientes({ clientes }) {
+export default function Clientes({ clientes }) {
     const router = useRouter();
     if (clientes.data.length === 0) return (
         <Grid centered verticalAlign="middle" columns={1} style={{height:"80vh"}}>

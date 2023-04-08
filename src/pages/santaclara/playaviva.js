@@ -4,7 +4,7 @@ import { CldImage } from "next-cloudinary";
 import { search, mapImageResources } from "@/lib/cloudinary";
 import { useState } from "react";
 
-export default function playaviva({ images: defaultImages, nextCursor: defaultNextCursor, folders }) {
+export default function Playaviva({ images: defaultImages, nextCursor: defaultNextCursor, folders }) {
   const [images, setImages] = useState(defaultImages)
   const [nextCursor, setNextCursor] = useState(defaultNextCursor)
   async function handleLoadMore(e) {
