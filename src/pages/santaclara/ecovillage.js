@@ -50,8 +50,8 @@ export default function Ecovillage({
         <Tab.Pane attached={false}>
           {videos.map((video) => (
             <Embed 
+            key={video.id}
             active url={video.url} 
-            id={video.id} 
             autoplay
             iframe={{
               allowFullScreen: true,
