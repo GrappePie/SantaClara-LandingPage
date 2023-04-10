@@ -1,9 +1,10 @@
 import { Form, Input, Button, Grid } from "semantic-ui-react"
 import { useState } from "react"
-import { signIn } from "next-auth/react"
+import { useRouter } from "next/router"
 
 
-export default function LoginPage( { csrfToken }) {
+export default function LoginPage() {
+  const router = useRouter()
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -14,11 +15,23 @@ export default function LoginPage( { csrfToken }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    signIn("credentials", {
-      redirect: true,
-      username: user.username,
-      password: user.password,
-    })
+    try {
+      const res = fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }).then((res) => {
+        if (res.status === 200) {
+          console.log(res)
+          router.push("/")
+        }
+      })
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
 
   return (

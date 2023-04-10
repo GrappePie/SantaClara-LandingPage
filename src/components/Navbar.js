@@ -1,7 +1,6 @@
 import { Menu, Container, Button } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { getSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState, useRef } from "react";
 
 const Navbar = () => {
@@ -9,39 +8,62 @@ const Navbar = () => {
   const myRef = useRef(null);
   const [hide, setHide] = useState(false);
   useEffect(() => {
-    getSession().then((session) => {
-      if (session) {
+    async function fetchData() {
+      const response = await fetch("/api/profile");
+      const profile = await response.json();
+      if (profile.role === "admin") {
         setHide(false);
       } else {
         setHide(true);
         router.route.slice(0, 7) === "/admin/" && router.push("/");
       }
-    })
-  }, [])
+    }
+    fetchData();
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    signIn();
+    router.push("/login");
   };
 
-
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    signOut()
-    router.push("/")
-  }
+    try {
+      const response = await fetch("/api/auth/logout");
+      const data = await response.json();
+      console.log(data);
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+      router.push("/");
+    }
+  };
   return (
     <Menu stackable attached borderless ref={myRef}>
       <Container>
         <Menu.Item>
           <Link href="/">
-            <img src="https://static.wixstatic.com/media/904537_c6b6d4ed0abf4f46b00764d284352f78~mv2.png/v1/fill/w_416,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo-sta-clara-final-1.png" height={64} alt="" />
+            <img
+              src="https://static.wixstatic.com/media/904537_c6b6d4ed0abf4f46b00764d284352f78~mv2.png/v1/fill/w_416,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo-sta-clara-final-1.png"
+              height={64}
+              alt=""
+            />
           </Link>
         </Menu.Item>
-        {(hide)?null:<Menu.Item><Link href="/admin/clientes">Clientes</Link></Menu.Item>}
-        <Menu.Item><Link href="/santaclara/ecovillage">Ecovillage</Link></Menu.Item>
-        <Menu.Item><Link href="/santaclara/playaviva">Playaviva</Link></Menu.Item>
-        <Menu.Item><Link href="/santaclara/ubicaciones">Ubicaciones</Link></Menu.Item>
+        {hide ? null : (
+          <Menu.Item>
+            <Link href="/admin/clientes">Clientes</Link>
+          </Menu.Item>
+        )}
+        <Menu.Item>
+          <Link href="/santaclara/ecovillage">Ecovillage</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link href="/santaclara/playaviva">Playaviva</Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link href="/santaclara/ubicaciones">Ubicaciones</Link>
+        </Menu.Item>
         <Menu.Item position="right">
           <Container
             style={{
@@ -50,24 +72,21 @@ const Navbar = () => {
               width: "200px",
             }}
           >
-          <Button
-            color="green"
-            onClick={() => router.push("/clientes/registro")}
-          >
-            Contactar
-          </Button>
-          {(hide)?<Button
-            color="blue"
-            onClick={handleLogin}
-          >
-            Login
-          </Button>:<Button
-            color="red"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>}
-          
+            <Button
+              color="green"
+              onClick={() => router.push("/clientes/registro")}
+            >
+              Contactar
+            </Button>
+            {hide ? (
+              <Button color="blue" onClick={handleLogin}>
+                Login
+              </Button>
+            ) : (
+              <Button color="red" onClick={handleLogout}>
+                Logout
+              </Button>
+            )}
           </Container>
         </Menu.Item>
       </Container>

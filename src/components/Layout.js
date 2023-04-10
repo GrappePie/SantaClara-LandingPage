@@ -17,7 +17,7 @@ export const Layout = ({ children }) => {
       statusMessage="Normalmente responde en 1 hora"
       placeholder="Escribe tu mensaje"
       notificationSound
-      notificationSoundSrc="https://www.soundjay.com/button/beep-07.wav"
+      notificationSoundSrc="https://opengameart.org/sites/default/files/pop.ogg"
       />
     </>
   );

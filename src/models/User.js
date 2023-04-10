@@ -21,6 +21,13 @@ const userSchema = new Schema({
         trim: true,
         maxlength: [50, 'El email no puede tener más de 50 caracteres'],
     },
+    role: {
+        type: String,
+        required: [true, 'El rol es obligatorio'],
+        unique: false,
+        trim: true,
+        maxlength: [50, 'El rol no puede tener más de 50 caracteres'],
+    },
 },{
     timestamps: true,
     versionKey: false
