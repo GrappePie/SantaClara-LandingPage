@@ -1,9 +1,12 @@
 import { Form, Input, Button, Grid } from "semantic-ui-react"
 import { useState } from "react"
 import { useRouter } from "next/router"
+import { useDispatch } from "react-redux";
+import { setHide } from "@/Hooks/HiddenSlice";
 
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
   const router = useRouter()
   const [user, setUser] = useState({
     username: "",
@@ -24,7 +27,7 @@ export default function LoginPage() {
         body: JSON.stringify(user),
       }).then((res) => {
         if (res.status === 200) {
-          console.log(res)
+          dispatch(setHide(false));
           router.push("/")
         }
       })

@@ -2,19 +2,22 @@ import { Menu, Container, Button } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setHide } from "@/Hooks/HiddenSlice";
 
 const Navbar = () => {
+  const hide = useSelector((state) => state.hidden);
+  const dispatch = useDispatch();
   const router = useRouter();
   const myRef = useRef(null);
-  const [hide, setHide] = useState(false);
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/api/profile");
       const profile = await response.json();
       if (profile.role === "admin") {
-        setHide(false);
+        dispatch(setHide(false));
       } else {
-        setHide(true);
+        dispatch(setHide(true));
         router.route.slice(0, 7) === "/admin/" && router.push("/");
       }
     }
@@ -31,10 +34,10 @@ const Navbar = () => {
     try {
       const response = await fetch("/api/auth/logout");
       const data = await response.json();
-      console.log(data);
+      dispatch(setHide(true));
       router.push("/");
     } catch (error) {
-      console.log(error);
+      dispatch(setHide(true));
       router.push("/");
     }
   };
