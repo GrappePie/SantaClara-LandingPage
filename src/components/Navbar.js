@@ -9,20 +9,6 @@ const Navbar = () => {
   const hide = useSelector((state) => state.hidden);
   const dispatch = useDispatch();
   const router = useRouter();
-  const myRef = useRef(null);
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/api/profile");
-      const profile = await response.json();
-      if (profile.role === "admin") {
-        dispatch(setHide(false));
-      } else {
-        dispatch(setHide(true));
-        router.route.slice(0, 7) === "/admin/" && router.push("/");
-      }
-    }
-    fetchData();
-  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -42,7 +28,7 @@ const Navbar = () => {
     }
   };
   return (
-    <Menu stackable attached borderless ref={myRef}>
+    <Menu stackable attached borderless>
       <Container>
         <Menu.Item>
           <Link href="/">

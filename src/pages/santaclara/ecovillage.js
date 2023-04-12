@@ -1,4 +1,4 @@
-import { Container, Image, Button, Tab, Embed } from "semantic-ui-react";
+import { Container, Image, Button, Tab, Embed, Grid, Header } from "semantic-ui-react";
 import { search, mapImageResources } from "@/lib/cloudinary";
 import { useState } from "react";
 
@@ -37,7 +37,9 @@ export default function Ecovillage({
             ))}
           </Image.Group>
           {!nextCursor ? null : (
-            <Button onClick={() => handleLoadMore(nextCursor)}>Load More</Button>
+            <Button onClick={() => handleLoadMore(nextCursor)}>
+              Load More
+            </Button>
           )}
         </Tab.Pane>
       ),
@@ -54,6 +56,16 @@ export default function Ecovillage({
 
   return (
     <Container>
+      <Grid centered columns={3}>
+        <Grid.Column>
+          <Header as="h1">Santa Clara Ecovillage</Header>
+          <p>
+            Santa Clara Ecovillage es una comunidad vacacional de la marca
+            ALMAVIVA a 2 minutos de las hermosas playas y salineras de Santa
+            Clara, hogar de flamencos.
+          </p>
+        </Grid.Column>
+      </Grid>
       <Tab menu={{ attached: false }} panes={panes} />
     </Container>
   );
