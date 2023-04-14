@@ -5,7 +5,6 @@ import { useState } from "react";
 export default function Ecovillage({
   images: defaultImages,
   nextCursor: defaultNextCursor,
-  folders,
 }) {
   const [images, setImages] = useState(defaultImages);
   const [nextCursor, setNextCursor] = useState(defaultNextCursor);
@@ -33,6 +32,7 @@ export default function Ecovillage({
         <Tab.Pane attached={false}>
           <Image.Group>
             {images.map((image) => (
+                // eslint-disable-next-line jsx-a11y/alt-text
               <Image key={image.id} src={image.url} />
             ))}
           </Image.Group>

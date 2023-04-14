@@ -1,7 +1,7 @@
 import { Menu, Container, Button } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setHide } from "@/Hooks/HiddenSlice";
 
@@ -34,6 +34,7 @@ const Navbar = () => {
     try {
       const response = await fetch("/api/auth/logout");
       const data = await response.json();
+      console.log(data);
       dispatch(setHide(true));
       router.push("/");
     } catch (error) {
@@ -46,6 +47,7 @@ const Navbar = () => {
       <Container>
         <Menu.Item>
           <Link href="/">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://static.wixstatic.com/media/904537_c6b6d4ed0abf4f46b00764d284352f78~mv2.png/v1/fill/w_416,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo-sta-clara-final-1.png"
               height={64}
@@ -75,11 +77,14 @@ const Navbar = () => {
               width: "200px",
             }}
           >
+            <Link href="https://drive.google.com/uc?export=download&id=12kd5UFLrfHDGdn70X-F4NO0S3J3B_qLI" >
+              <Button color="yellow">Descargar Brochure</Button>
+            </Link>
             <Button
               color="green"
               onClick={() => router.push("/clientes/registro")}
             >
-              Contactar
+              Ver Disponibilidad
             </Button>
             {hide ? (
               <Button color="blue" onClick={handleLogin}>
