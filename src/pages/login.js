@@ -2,7 +2,7 @@ import { Form, Input, Button, Grid } from "semantic-ui-react"
 import { useState } from "react"
 import { useRouter } from "next/router"
 import { useDispatch } from "react-redux";
-import { setHide } from "@/Hooks/HiddenSlice";
+import { setHidden } from "@/Hooks/HiddenSlice";
 
 
 export default function LoginPage() {
@@ -19,7 +19,7 @@ export default function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault()
     try {
-      const res = fetch("/api/auth/login", {
+      fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export default function LoginPage() {
         body: JSON.stringify(user),
       }).then((res) => {
         if (res.status === 200) {
-          dispatch(setHide(false));
+          dispatch(setHidden(false));
           router.push("/")
         }
       })
