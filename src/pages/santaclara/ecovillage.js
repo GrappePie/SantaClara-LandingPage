@@ -1,5 +1,6 @@
-import { Container, Image, Button, Tab, Embed } from "semantic-ui-react";
+import { Container, Tab, Embed } from "semantic-ui-react";
 import { search, mapImageResources } from "@/lib/cloudinary";
+import Slider from "@/components/slider";
 import { useState } from "react";
 
 export default function Ecovillage({
@@ -30,15 +31,7 @@ export default function Ecovillage({
       menuItem: "Imagenes",
       render: () => (
         <Tab.Pane attached={false}>
-          <Image.Group>
-            {images.map((image) => (
-                // eslint-disable-next-line jsx-a11y/alt-text
-              <Image key={image.id} src={image.url} />
-            ))}
-          </Image.Group>
-          {!nextCursor ? null : (
-            <Button onClick={() => handleLoadMore(nextCursor)}>Load More</Button>
-          )}
+            <Slider images={images} />
         </Tab.Pane>
       ),
     },

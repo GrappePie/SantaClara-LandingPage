@@ -1,0 +1,6 @@
+.image-height {
+    max-height: 75vh;
+    max-width: 100%;
+    height: auto;
+    width: fit-content;
+}
