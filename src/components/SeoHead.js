@@ -16,7 +16,7 @@ const defaultMeta = {
     // used in twitter, facebook, etc. card when link copied in tweet/status
     image: '/thirteen.svg',
     author: 'GrappePie',
-    verification: 'di5dWd26XW-iOFfNSffrGJNaDqg6Y2hrrUgkbq206LE'
+    verification: 'M7zVp4uZ17hknwb2opmBSwsb9pEvdt3A4D95P_Lz0_c'
 };
 
 /**
