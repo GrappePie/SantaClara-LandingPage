@@ -20,6 +20,7 @@ export async function search(options = {}) {
       },
     }
   ).then((res) => res.json());
+    console.log(results.total_count)
   return results;
 }
 
