@@ -75,7 +75,7 @@ export const MobileNavbar = (
                 <Menu.Item>
                     <Button
                         color="green"
-                        onClick={() => router.push("/clientes/registro")}
+                        onClick={() => router.push("/cita/registro")}
                     >
                         Contactar
                     </Button>

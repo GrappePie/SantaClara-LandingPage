@@ -68,7 +68,7 @@ export const DesktopNavbar = (
                                     </Link>
                                     <Button
                                         color="green"
-                                        onClick={() => router.push("/clientes/registro")}
+                                        onClick={() => router.push("/cita/registro")}
                                     >
                                         Ver Disponibilidad
                                     </Button>
