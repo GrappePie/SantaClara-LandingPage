@@ -25,15 +25,19 @@ const CalendarComponent = () => {
         async function fetchData() {
             const response = await axios.get("/api/citas");
             await response.data.data.map((cita) => {
-                console.log(cita);
+                var fechaInicial = new Date(cita.fecha+ "T" +cita.hora);
+                var fechaFinal = new Date(fechaInicial.getTime() + 3600000);
+                var horaInicial = moment(fechaInicial).format('HH:mm A');
+                var horaFinal = moment(fechaFinal).format('HH:mm A');
                 appointments.push({
                     id: cita._id,
-                    title: `Cita reservada. ${new Date(cita.fecha).toLocaleString()}`,
-                    start: new Date(cita.fecha),
-                    end: new Date(cita.fecha),
+                    title: `${horaInicial} - ${horaFinal}`,
+                    start: fechaInicial,
+                    end: fechaFinal,
                     isReserved: true
                 });
             });
+            console.log(appointments);
             dispatch(setCitas(appointments));
         }
 
