@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CalendarComponent from "@/components/Calendar";
-import {Form,Button,Grid} from "semantic-ui-react";
+import {Form,Popup,Grid} from "semantic-ui-react";
 
 const IndexPage = () => {
     // State para almacenar los datos del formulario
@@ -12,6 +12,8 @@ const IndexPage = () => {
         hora: '',
     });
 
+    const [error, setError] = useState('Debe completar todos los campos');
+
     // Manejador de cambios en los inputs del formulario
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,7 +22,7 @@ const IndexPage = () => {
 
     // Manejador de envío del formulario
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         try {
             const response = await fetch('/api/citas', {
                 method: 'POST',
@@ -30,11 +32,23 @@ const IndexPage = () => {
                 body: JSON.stringify(formData),
             });
             const data = await response.json();
-            console.log('Respuesta del backend:', data);
+            if (!response.ok) {
+                setError(data.error);
+            }
+            updateCalendar();
         } catch (error) {
             console.error('Error al enviar la cita:', error);
         }
     };
+
+    // Actualizar el calendario
+    const updateCalendar = () => {
+        const calendar = document.getElementById('calendar');
+        calendar.innerHTML = '';
+        calendar.appendChild(<CalendarComponent/>);
+    }
+
+
 
     return (
         <div>
@@ -97,7 +111,12 @@ const IndexPage = () => {
                                     required
                                 />
                             </Form.Group>
-                            <Button type="submit">Agendar Cita</Button>
+                            <Popup
+                                trigger={<Form.Button content='Submit' />}
+                                content={error}
+                                on='click'
+                                position='top center'
+                            />
                         </Form>
                     </Grid.Column>
                 </Grid.Row>
