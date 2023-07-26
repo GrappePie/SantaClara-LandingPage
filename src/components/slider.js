@@ -7,7 +7,7 @@ const slider = ({ images }) => {
         <Carousel showThumbs={false} infiniteLoop={true} autoPlay={true} dynamicHeight={true} >
             {images.map((image, index) => (
                 <div key={index}>
-                    <Image src={image.url} alt="" width={image.width} height={image.height*0.70}/>
+                    <img src={image.url} alt=""/>
                 </div>
             ))}
         </Carousel>
