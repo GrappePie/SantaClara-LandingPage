@@ -8,17 +8,17 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 import Link from "next/link";
+import {AccountCircle} from "@mui/icons-material";
 
-const pages = [{id:1, name:'Ecovillage', url:'/santaclara/ecovillage'},{ id:2, name:'Playaviva', url:'/santaclara/playaviva'},{ id:3, name:'Ubicaciones', url:'/santaclara/ubicaciones'},{ id:4, name:'Ver Disponibilidad', url:'/cita/registro'}];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [{id:1, name:'Ecovillage', url:'/santaclara/ecovillage'},{ id:2, name:'Playaviva', url:'/santaclara/playaviva'},{ id:3, name:'Ubicaciones', url:'/santaclara/ubicaciones'},{ id:4, name:'Ver Disponibilidad', url:'/cita/registro'}, { id:5, name:'Descargar Brochure', url:'https://drive.google.com/uc?export=download&id=12kd5UFLrfHDGdn70X-F4NO0S3J3B_qLI'}];
+const settings = [{id:1, name:'Logout', url:'/api/auth/logout'}];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({myRef,hidden,handleLogout}) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -106,11 +106,11 @@ function ResponsiveAppBar() {
                             </Grid>
                         </Grid>
                     </Box>
-
+                    {hidden ? null : (
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <AccountCircle />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -130,12 +130,13 @@ function ResponsiveAppBar() {
                             onClose={handleCloseUserMenu}
                         >
                             {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                                <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+                                    {setting.name === 'Logout' ? <Button color="inherit" onClick={handleLogout}><Typography textAlign="center">{setting.name}</Typography></Button> : null}
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>

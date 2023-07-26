@@ -16,7 +16,7 @@ moment.updateLocale('es-mx', {
 moment.locale('es-mx');
 const localizer = momentLocalizer(moment);
 
-const appointments = [];
+var appointments = [];
 
 const CalendarComponent = () => {
     const citas = useSelector((state) => state.citas);
