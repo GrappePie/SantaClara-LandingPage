@@ -2,9 +2,7 @@ import {useRouter} from "next/router";
 import {useEffect, useRef} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {setHidden} from "@/Hooks/HiddenSlice";
-import {DesktopNavbar} from "@/components/DesktopNavbar";
-import {MobileNavbar} from "@/components/MobileNavbar";
-import {MediaContextProvider} from "@/lib/media";
+import NavbarMU from "@/components/NavbarMU";
 
 const Navbar = () => {
     const hidden = useSelector((state) => state.hidden);
@@ -40,10 +38,7 @@ const Navbar = () => {
         }
     };
     return (
-        <MediaContextProvider>
-            <DesktopNavbar myRef={myRef} hidden={hidden} handleLogout={handleLogout}/>
-            <MobileNavbar myRef={myRef} hidden={hidden} handleLogout={handleLogout}/>
-        </MediaContextProvider>
+        <NavbarMU myRef={myRef} hidden={hidden} handleLogout={handleLogout}/>
     );
 };
 
