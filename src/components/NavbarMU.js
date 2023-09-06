@@ -15,7 +15,7 @@ import Grid from '@mui/material/Grid';
 import Link from "next/link";
 import {AccountCircle} from "@mui/icons-material";
 
-const pages = [{id:1, name:'Ecovillage', url:'/santaclara/ecovillage'},{ id:2, name:'Playaviva', url:'/santaclara/playaviva'},{ id:3, name:'Ubicaciones', url:'/santaclara/ubicaciones'},{ id:4, name:'Ver Disponibilidad', url:'/cita/registro'}, { id:5, name:'Descargar Brochure', url:'https://drive.google.com/uc?export=download&id=12kd5UFLrfHDGdn70X-F4NO0S3J3B_qLI'}];
+const pages = [{id:1, name:'Ecovillage', url:'/santaclara/ecovillage'},{ id:2, name:'Playaviva', url:'/santaclara/playaviva'},{ id:3, name:'Ubicaciones', url:'/santaclara/ubicaciones'},{ id:4, name:'Ver Disponibilidad', url:'/cita/registro'}, { id:5, name:'Descargar Brochure', url:'https://github.com/GrappePie/SantaClara-LandingPage/raw/main/public/BROCHURE%20HD%20-%20SANTA%20CLARA%20ECOVILLAGE.pdf'}];
 const settings = [{id:1, name:'Logout', url:'/api/auth/logout'}];
 
 function ResponsiveAppBar({myRef,hidden,handleLogout}) {
