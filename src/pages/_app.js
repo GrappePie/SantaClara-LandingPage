@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/ubicaciones.css";
 import "semantic-ui-css/semantic.min.css";
 import {Layout} from "@/components/Layout";
 import {Provider} from "react-redux";
